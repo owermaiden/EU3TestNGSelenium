@@ -20,7 +20,7 @@ public class CloseAndQuit {
         driver = new ChromeDriver();  // after closing browser we need to open new one.............
         driver.get("http://practice.cybertekschool.com/open_new_tab");
         Thread.sleep(5000);
-        //closes all tabs
+        //closes all tabs and ends the session so that any information like cookies are deleted...
         driver.quit();
     }
 }
