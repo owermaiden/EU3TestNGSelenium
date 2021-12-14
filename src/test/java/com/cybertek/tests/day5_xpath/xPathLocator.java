@@ -38,6 +38,13 @@ public class xPathLocator {
         // parent child relationship -> find p element of div which has container class
         WebElement p = driver.findElement(By.xpath("//div[@class='container']/p"));
 
+        WebElement parentDiv = driver.findElement(By.xpath("//button[@name='button2']/parent::div"));
+
+        WebElement button3a = driver.findElement(By.xpath("//button[@name='button2']/following-sibling::button"));
+
+        // go to one level up with /.. and then ppick the child which you want
+        WebElement p2 = driver.findElement(By.xpath("//button[@name='button2']/../p"));
+
         // what if an element is not sibling or there is no parent child relationship between them
         WebElement p1 = driver.findElement(By.xpath("(//p)[1]"));
 
