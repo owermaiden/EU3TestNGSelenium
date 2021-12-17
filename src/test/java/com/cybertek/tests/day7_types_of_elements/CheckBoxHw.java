@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+
 public class CheckBoxHw {
 
     @Test
@@ -15,6 +19,8 @@ public class CheckBoxHw {
         WebDriver driver = WebDriverFactory.getDriver("chrome");
         driver.manage().window().maximize();
 
+
+
         driver.get("http://secure.smartbearsoftware.com/samples/TestComplete12/WebOrders/Login.aspx");
 
         driver.findElement(By.cssSelector("#ctl00_MainContent_username")).sendKeys("Tester");
@@ -22,33 +28,34 @@ public class CheckBoxHw {
         driver.findElement(By.cssSelector("#ctl00_MainContent_login_button")).click();
 
         driver.findElement(By.cssSelector("#ctl00_MainContent_btnCheckAll")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[4]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[5]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[6]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[7]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])[8]")).isSelected(),"verify checkbox is not selected");
+
+
+        for (int i = 1; i < 9 ; i++){
+            Assert.assertTrue(driver.findElement(By.xpath("(//input[@type='checkbox'])["+i+"]")).isSelected(),"verify checkbox is not selected");
+        }
 
         driver.findElement(By.cssSelector("#ctl00_MainContent_btnUncheckAll")).click();
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[1]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[4]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[5]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[6]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[7]")).isSelected(),"verify checkbox is not selected");
-        Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])[8]")).isSelected(),"verify checkbox is not selected");
+        for (int i = 1; i < 9 ; i++){
+            Assert.assertFalse(driver.findElement(By.xpath("(//input[@type='checkbox'])["+i+"]")).isSelected(),"verify checkbox is not selected");
+        }
 
-
-        driver.findElement(By.cssSelector("#ctl00_MainContent_orderGrid_ctl03_OrderSelector")).click();
+        driver.findElement(By.xpath("(//input[@type='checkbox'])[2]")).click();
+        String selected = driver.findElement(By.xpath("(//input[@type='checkbox'])[2]/parent::td/following-sibling::td[1]")).getText();
         driver.findElement(By.cssSelector("#ctl00_MainContent_btnDelete")).click();
 
-        Assert.assertTrue(driver.findElement(By.cssSelector("#ctl00_MainContent_orderGrid_ctl03_OrderSelector")).isDisplayed(),"verify element is not exist");
+        isElementPresent(By.xpath("//td[text()='"+selected+"']"), driver);
 
         Thread.sleep(3000L);
         driver.quit();
 
+    }
+
+    public boolean isElementPresent(By locatorKey, WebDriver driver) {
+        try {
+            driver.findElement(locatorKey);
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
     }
 }
