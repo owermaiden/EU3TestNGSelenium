@@ -43,7 +43,7 @@ public class CheckBoxHw {
         String selected = driver.findElement(By.xpath("(//input[@type='checkbox'])[2]/parent::td/following-sibling::td[1]")).getText();
         driver.findElement(By.cssSelector("#ctl00_MainContent_btnDelete")).click();
 
-        isElementPresent(By.xpath("//td[text()='"+selected+"']"), driver);
+        Assert.assertFalse(isElementPresent(By.xpath("//td[text()='"+selected+"']"), driver), "verify element is deleted");
 
         Thread.sleep(3000L);
         driver.quit();
