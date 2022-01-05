@@ -18,7 +18,7 @@ public class ImplicitWaitExample {
     @BeforeMethod
     public void setUp(){
         driver = WebDriverFactory.getDriver("chrome");
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);//it only trigger when findelement method called...
 
     }
 
