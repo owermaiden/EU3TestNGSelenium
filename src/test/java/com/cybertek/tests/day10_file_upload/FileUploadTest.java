@@ -51,7 +51,7 @@ public class FileUploadTest {
         WebElement chooseFile = driver.findElement(By.name("file"));
 
         //sending file with sendKeys method
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = System.getProperty("user.dir"); // that gives the project directory path
         String filePath = "src/test/resources/textfile.txt";
         String fullPath = projectPath+"/"+filePath;
         chooseFile.sendKeys(fullPath);
