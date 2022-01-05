@@ -8,12 +8,14 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class HW {
     WebDriver driver;
@@ -141,6 +143,57 @@ public class HW {
         String mailadress = driver.findElement(By.xpath("//*[@id=\"odesilatel\"]")).getText();
         Assert.assertEquals(actualMail,mailadress);
 
+        String subject = "Thanks for subscribing to practice.cybertekschool.com!";
+        WebElement mailSubject = driver.findElement(By.cssSelector("#predmet"));
+        String actualSubject = mailSubject.getText();
+        Assert.assertEquals(subject,actualSubject);
+    }
+
+    @Test
+    public void testCase7(){
+        driver.get("https://practice-cybertekschool.herokuapp.com");
+        driver.findElement(By.linkText("File Upload")).click();
+        WebElement chooseFile = driver.findElement(By.name("file"));
+        String projectPath = System.getProperty("user.dir"); // that gives the project directory path
+        String filePath = "src/test/resources/textfile.txt";
+        String fullPath = projectPath+"/"+filePath;
+        chooseFile.sendKeys(fullPath);
+        driver.findElement(By.id("file-submit")).click();
+
+        String message = "File Uploaded!";
+        String result = driver.findElement(By.cssSelector(".example>h3")).getText();
+        Assert.assertEquals(message,result);
+
+        String actualFileName = "textfile.txt";
+        String fileName = driver.findElement(By.cssSelector("#uploaded-files")).getText();
+        Assert.assertEquals(actualFileName,fileName);
+    }
+
+    @Test
+    public void testCase8(){
+        driver.get("https://practice-cybertekschool.herokuapp.com");
+        driver.findElement(By.linkText("Autocomplete")).click();
+        driver.findElement(By.cssSelector("#myCountry")).sendKeys("United States of America");
+        WebElement autocomplete = driver.findElement(By.cssSelector(".autocomplete>div>div>strong"));
+        Assert.assertTrue(autocomplete.isDisplayed(),"verify country is displayed");
+    }
+
+
+    @DataProvider(name = "status_codes")
+    public Object[] createData1() {
+        return new Object[] {200,301,404,500};
+    }
+
+    @Test(dataProvider = "status_codes")
+    public void testCase9_10_11_12(int code){
+        driver.get("https://practice-cybertekschool.herokuapp.com");
+        driver.findElement(By.linkText("Status Codes")).click();
+        driver.findElement(By.xpath("//a[.="+code+"]")).click();
+        String result = driver.findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
+        String[] result2 = result.split("\n");
+        System.out.println(Arrays.toString(result2));
+        String actualCodes = "This page returned a "+code+" status code.";
+        Assert.assertEquals(actualCodes,result2[0]);
 
     }
 
