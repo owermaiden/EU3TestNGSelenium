@@ -13,9 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class HW {
     WebDriver driver;
@@ -186,6 +184,7 @@ public class HW {
 
     @Test(dataProvider = "status_codes")
     public void testCase9_10_11_12(int code){
+
         driver.get("https://practice-cybertekschool.herokuapp.com");
         driver.findElement(By.linkText("Status Codes")).click();
         driver.findElement(By.xpath("//a[.="+code+"]")).click();
