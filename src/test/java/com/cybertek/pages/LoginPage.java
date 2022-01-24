@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+// Base page i extend etmedik çünkü loginpage içerisinde common değildi..Farklı bir sayfa idi bu...
 public class LoginPage {
 
     public LoginPage(){

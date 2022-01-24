@@ -29,7 +29,7 @@ external site.
         //two main ways to get txt from web elements
         //1.getText()--> it will work %99 and it will return string
         //2.getAttribute("value") --> second way of getting text especially input boxes
-        String actualEmail = emailInputBox.getAttribute("value");
+        String actualEmail = emailInputBox.getAttribute("value"); 
         System.out.println("actualEmail = " + actualEmail);
         //verify that email is displayed in the input box
         if(expectedEmail.equals(actualEmail)){
