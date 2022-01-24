@@ -22,7 +22,6 @@ public class PageSubtitleTest extends TestBase {
     public void test1(){
 
         LoginPage loginPage = new LoginPage();
-
         loginPage.loginAsDriver();
 
         String expectedSubtitle = "Quick Launchpad";
@@ -30,15 +29,12 @@ public class PageSubtitleTest extends TestBase {
         DashboardPage dashboardPage = new DashboardPage();
 
         String actualSubtitle = dashboardPage.getPageSubTitle();
-
         Assert.assertEquals(actualSubtitle,expectedSubtitle,"Verify subtitle");
 
         dashboardPage.navigateToModule("Activities","Calendar Events");
 
         CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
-
         BrowserUtils.waitFor(2);
-
         Assert.assertEquals(calendarEventsPage.getPageSubTitle(),"Calendar Events","Verify subtitle Calendar Events");
 
     }
