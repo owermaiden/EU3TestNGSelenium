@@ -18,12 +18,12 @@ public class AmazonTest {
         driver.get("https://amazon.com");
         String search = "selenium";
 
-        WebElement input = driver.findElement(By.xpath("//input[@id=\"twotabsearchtextbox\"]"));
+        WebElement input = driver.findElement(By.xpath("//input[@id='twotabsearchtextbox']"));
         input.sendKeys("selenium");
 
         driver.findElement(By.xpath("//*[@id=\"nav-search-submit-button\"]")).click();
 
-        WebElement searchResult = driver.findElement(By.xpath("//span[contains(text(),'results for')]"));
+        WebElement searchResult = driver.findElement(By.xpath("//span[contains(.,'results for')]"));
         String resultText = searchResult.getText();
 
         String actualText = "verify 1-48 of 304 results for "+search ;

@@ -28,11 +28,11 @@ public class cssLocators {
 
         //starts with ^, ends with $, contains * (for dynamic id )
         driver.findElement(By.cssSelector("button[id^='button_']")).click();  //starts with
-        driver.findElement(By.cssSelector("button[id$='_button']")).click();  //endswith
+        driver.findElement(By.cssSelector("button[id$='_button']")).click();  //ends with
         driver.findElement(By.cssSelector("button[id*='button']")).click();    //contains
 
         // index of element under the same family (doesn't work)
-        // driver.findElement(By.cssSelector("button[id$='_button']:nth-of-type(2)")).click();
+         driver.findElement(By.cssSelector("button[id$='_button']:nth-of-type(2)")).click();
 
 
         Thread.sleep(2000L);
