@@ -90,7 +90,7 @@ public class TestBase {
             extentLogger.fail(result.getThrowable());
 
         }
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         Driver.closeDriver();
     }
 
